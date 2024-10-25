@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/agri-fincaster/static/css/main.f855e6bc.css",
+    "main.js": "/agri-fincaster/static/js/main.a75b294a.js",
+    "static/js/453.2aceff39.chunk.js": "/agri-fincaster/static/js/453.2aceff39.chunk.js",
+    "static/media/logo.svg": "/agri-fincaster/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/agri-fincaster/index.html",
+    "main.f855e6bc.css.map": "/agri-fincaster/static/css/main.f855e6bc.css.map",
+    "main.a75b294a.js.map": "/agri-fincaster/static/js/main.a75b294a.js.map",
+    "453.2aceff39.chunk.js.map": "/agri-fincaster/static/js/453.2aceff39.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f855e6bc.css",
+    "static/js/main.a75b294a.js"
+  ]
+}
