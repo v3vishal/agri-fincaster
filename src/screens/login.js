@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-  StyleSheet,
-  Image,
-  Modal,
-  KeyboardAvoidingView,
-  ScrollView,
-  Picker,
-} from 'react-native';
-import db from "../config";
-import firebase from "firebase";
-import { Icon } from 'react-native-elements';
-import Home from '../screens/home.js';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, Image, Modal, KeyboardAvoidingView, ScrollView } from 'react-native';
+import db from '../config';
+import 'firebase/auth';
+import 'firebase/firestore';
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+const firebaseConfig = {
+  apiKey: "AIzaSyAMKypDklqCtpeaBRv5NEqbeNS-XI4F_OY",
+  authDomain: "agrifincaster.firebaseapp.com",
+  projectId: "agrifincaster",
+  storageBucket: "agrifincaster.appspot.com",
+  messagingSenderId: "209562331382",
+  appId: "1:209562331382:web:7008fd03567e1448ffe4d7",
+  measurementId: "G-CBLK8TF2EP"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 function Login({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -28,27 +28,23 @@ function Login({ navigation }) {
 
   const userSignUp = (username, password, confirmPassword) => {
     if (password !== confirmPassword) {
-      return Alert.alert("password doesn't match\nCheck your password.");
+      return Alert.alert("Password doesn't match. Check your password.");
     } else {
-      firebase
-        .firestore()
-        .createUserWithEmailAndPassword(username, password)
+      createUserWithEmailAndPassword(username, password)
         .then(() => {
-          db.collection("users").add({
+          db.collection('users').add({
             name: name,
             username: username,
             contact: contact,
           });
-
-          return Alert.alert("User Added Successfully", "", [
+          return Alert.alert('User Added Successfully', '', [
             {
-              text: "OK",
+              text: 'OK',
               onPress: () => setIsModalVisible(false),
-            }
+            },
           ]);
         })
-        .catch(error => {
-          // Handle Errors here.
+        .catch((error) => {
           var errorCode = error.code;
           var errorMessage = error.message;
           return Alert.alert(errorMessage);
@@ -57,13 +53,11 @@ function Login({ navigation }) {
   };
 
   const userLogin = (username, password) => {
-    firebase
-      .firestore()
-      .signInWithEmailAndPassword(username, password)
+    signInWithEmailAndPassword(username, password)
       .then(() => {
-        navigation.navigate("TabNavigation"); 
+        navigation.navigate('TabNavigation');
       })
-      .catch(error => {
+      .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
         return Alert.alert(errorMessage);
@@ -72,159 +66,92 @@ function Login({ navigation }) {
 
   const showModal = () => {
     return (
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={isModalVisible}>
+      <Modal animationType="fade" transparent={true} visible={isModalVisible}>
         <View style={styles.modalContainer}>
-          <ScrollView style={{ width: '100%' }}>
+        <ScrollView contentContainerStyle={{ width: '100%' }}>
             <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="info" type="feather" color="coral" />
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}>ℹ️</Text>
                 <Text style={styles.modalTitle}>Registration</Text>
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="user" type="feather" color="#FF3161" />
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}></Text>
                 <TextInput
                   style={styles.formTextInput}
-                  placeholder={'Name'}
+                  placeholder="Name"
                   maxLength={15}
-                  onChangeText={(text) => {
-                    setName(text);
-                  }}
+                  onChangeText={(text) => setName(text)}
                 />
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="file-text" type="feather" color="tan" />
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}></Text>
                 <TextInput
                   style={styles.formTextInput}
-                  placeholder={'Username'}
+                  placeholder="Username"
                   maxLength={15}
-                  onChangeText={(text) => {
-                    setUsername(text);
-                  }}
+                  onChangeText={(text) => setUsername(text)}
                 />
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="phone" type="feather" color="#BEDF7C" />
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}></Text>
                 <TextInput
                   style={styles.formTextInput}
-                  placeholder={'Contact'}
+                  placeholder="Contact"
                   maxLength={10}
-                  keyboardType={'numeric'}
-                  onChangeText={(text) => {
-                    setContact(text);
-                  }}
+                  keyboardType="numeric"
+                  onChangeText={(text) => setContact(text)}
                 />
               </View>
-
-              <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-          }}>
-          <Icon
-            reverse
-            name="shield"
-            type="feather"
-            color="#A2DCE7"
-
-          />
-              <TextInput
-                style={styles.formTextInput}
-                placeholder={'Password'}
-                secureTextEntry={true}
-                onChangeText={(text) => {
-                  setPassword(text);
-                }}
-              />
-</View>
-<View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-          }}>
-          <Icon
-            reverse
-            name="lock"
-            type="feather"
-            color="salmon"
-
-          />
-              <TextInput
-                style={styles.formTextInput}
-                placeholder={'Confirm Password'}
-                secureTextEntry={true}
-                onChangeText={(text) => {
-                  setConfirmPassword(text);
-                }}
-              />
-</View>
-
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="user-plus" type="feather" color="orange" />
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}>️</Text>
+                <TextInput
+                  style={styles.formTextInput}
+                  placeholder="Password"
+                  secureTextEntry={true}
+                  onChangeText={(text) => setPassword(text)}
+                />
+              </View>
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}></Text>
+                <TextInput
+                  style={styles.formTextInput}
+                  placeholder="Confirm Password"
+                  secureTextEntry={true}
+                  onChangeText={(text) => setConfirmPassword(text)}
+                />
+              </View>
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}></Text>
+                <TouchableOpacity
+                  style={language === "ENGLISH" ? styles.selectedOption : styles.option}
+                  onPress={() => setLanguage("ENGLISH")}
+                >
+                  <Text style={styles.optionText}>ENGLISH</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={language === "HINDI" ? styles.selectedOption : styles.option}
+                  onPress={() => setLanguage("HINDI")}
+                >
+                  <Text style={styles.optionText}>HINDI</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.modalRow}>
                 <View style={styles.modalBackButton}>
                   <TouchableOpacity
                     style={styles.registerButton}
-                    onPress={() => this.userSignUp(username, password, confirmPassword)}>
+                    onPress={() => userSignUp(username, password, confirmPassword)}
+                  >
                     <Text style={styles.registerButtonText}>Register</Text>
                   </TouchableOpacity>
                 </View>
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="minus" type="feather" color="darkblue" />
+              <View style={styles.modalRow}>
                 <View style={styles.modalBackButton}>
                   <TouchableOpacity
                     style={styles.cancelButton}
-                    onPress={() => setIsModalVisible(false)}>
-                    <Text
-                      style={{
-                        color: '#F0A160',
-                        textSize: 20,
-                        fontWeight: 'bold',
-                      }}>
-                      Cancel
-                    </Text>
+                    onPress={() => setIsModalVisible(false)}
+                  >
+                    <Text style={styles.cancelText}>Cancel</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -236,94 +163,61 @@ function Login({ navigation }) {
   };
 
   return (
-    <ScrollView style={styles.container}>
-        <View>
-          <Image
-            source={require('../assets/mee.gif')}
-            style={{ width:650, height: 450, marginTop: 10, marginLeft: 10 }}
+    <ScrollView contentContainerStyle={styles.container}>
+      <View>
+        <Image
+          source={require('../assetss/mee.gif')}
+          style={{ width: 650, height: 450, marginTop: 10, marginLeft: 10 }}
+        />
+      </View>
+      <ScrollView>
+        <View style={styles.inputRow}>
+          <Text style={styles.icon}></Text>
+          <TextInput
+            style={styles.loginBox}
+            placeholder="Enter Username"
+            keyboardType="email-address"
+            onChangeText={(text) => setUsername(text)}
           />
         </View>
-        <ScrollView>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'flex-start',
-            }}>
-            <Icon reverse name="at-sign" type="feather" color="#DCAE96" />
-            <TextInput
-              style={styles.loginBox}
-              placeholder="Enter Username"
-              keyboardType="email-address"
-              onChangeText={(text) => {
-                setUsername(text);
-              }}
-            />
-          </View>
-<View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-          }}>
-          <Icon
-            reverse
-            name="key"
-            type="feather"
-            color="#FF4500"
-
-          />
+        <View style={styles.inputRow}>
+          <Text style={styles.icon}></Text>
           <TextInput
             style={styles.loginBox}
             placeholder="Enter Your Password"
             secureTextEntry={true}
-            onChangeText={(text) => {
-              setPassword(text);
-            }}
+            onChangeText={(text) => setPassword(text)}
           />
-</View>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'flex-start',
-            }}>
-            <Icon reverse name="globe" type="feather" color="#00E0D4" />
-            <Picker
-              style={{ height: 40, width: 200 }}
-              selectedValue={language}
-              onValueChange={(text) => {
-                setLanguage(text);
-                console.log(text);
-              }}>
-              <Picker.Item label="ENGLISH" value="ENGLISH" />
-              <Picker.Item label="HINDI" value="HINDI" />
-            </Picker>
-          </View>
+        </View>
+        <View style={styles.inputRow}>
+          <Text style={styles.icon}></Text>
           <TouchableOpacity
-            style={[styles.button, { marginBottom: 20, marginTop: 20 }]}
-            onPress={() => {
-              userLogin(username, password);
-            }}>
-            <Text style={styles.buttonText}>Log In</Text>
+            style={language === "ENGLISH" ? styles.selectedOption : styles.option}
+            onPress={() => setLanguage("ENGLISH")}
+          >
+            <Text style={styles.optionText}>ENGLISH</Text>
           </TouchableOpacity>
-
           <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setIsModalVisible(true);
-            }}>
-            <Text style={styles.buttonText}>SignUp</Text>
+            style={language === "HINDI" ? styles.selectedOption : styles.option}
+            onPress={() => setLanguage("HINDI")}
+          >
+            <Text style={styles.optionText}>HINDI</Text>
           </TouchableOpacity>
-
-          {showModal()}
-        </ScrollView>
+        </View>
+        <TouchableOpacity
+          style={[styles.button, { marginBottom: 20, marginTop: 20 }]}
+          onPress={() => userLogin(username, password)}
+        >
+          <Text style={styles.buttonText}>Log In</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => setIsModalVisible(true)}>
+          <Text style={styles.buttonText}>Sign Up</Text>
+        </TouchableOpacity>
+        {showModal()}
       </ScrollView>
-    );
-  }
-
+    </ScrollView>
+  );
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

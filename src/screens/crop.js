@@ -1,10 +1,7 @@
-import React, { useState } from "react";
-import { Animated, Text, View, StyleSheet, Button, SafeAreaView,  TouchableOpacity, Modal, ScrollView, Image,  KeyboardAvoidingView, TextInput } from "react-native";
-import AppHeader from '../components/AppHeader'
-import { SearchBar, Icon, Header } from 'react-native-elements';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Modal, ScrollView, KeyboardAvoidingView } from 'react-native';
 
-
-function Crop() {  
+function Crop() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModal2Visible, setIsModal2Visible] = useState(false);
   const [type, setType] = useState('');
@@ -14,91 +11,46 @@ function Crop() {
 
   const showModal = () => {
     return (
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={isModalVisible}>
+      <Modal animationType="fade" transparent={true} visible={isModalVisible}>
         <View style={styles.modalContainer}>
-          <ScrollView style={{ width: '100%' }}>
+        <ScrollView contentContainerStyle={{ width: '100%' }}>
             <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
-
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="globe" type="feather" color="#FFC270" />
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}>🌍</Text>
                 <TextInput
                   style={styles.formTextInput}
-                  placeholder={'crop type'}
-                  onChangeText={(text) => {
-                    setType(text);
-                  }}
+                  placeholder="Crop type"
+                  onChangeText={(text) => setType(text)}
                 />
               </View>
-
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                  marginLeft: -10,
-                }}>
-                <Icon
-                  reverse
-                  name="layout"
-                  type="feather"
-                  color="#A2DCE7"
-                />
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}>🌱</Text>
                 <TextInput
                   style={styles.formTextInput}
-                  placeholder={'land area'}
+                  placeholder="Land area"
                   multiline={true}
-                  onChangeText={(text) => {
-                    setArea(text);
-                  }}
+                  onChangeText={(text) => setArea(text)}
                 />
               </View>
-
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="user-plus" type="feather" color="orange" />
+              <View style={styles.modalRow}>
                 <View style={styles.modalBackButton}>
                   <TouchableOpacity
                     style={styles.registerButton}
-                    onPress={() => { /* Handle Registration */ }}>
+                    onPress={() => {
+                      // Handle Registration
+                    }}
+                  >
                     <Text style={styles.registerButtonText}>Register</Text>
                   </TouchableOpacity>
                 </View>
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="minus" type="feather" color="darkblue" />
+              <View style={styles.modalRow}>
                 <View style={styles.modalBackButton}>
                   <TouchableOpacity
                     style={styles.cancelButton}
-                    onPress={() => setIsModalVisible(false)}>
-                    <Text
-                      style={{
-                        color: '#F0A160',
-                        textSize: 20,
-                        fontWeight: 'bold',
-                      }}>
-                      Cancel
-                    </Text>
+                    onPress={() => setIsModalVisible(false)}
+                  >
+                    <Text style={styles.cancelText}>Cancel</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -111,50 +63,25 @@ function Crop() {
 
   const showModal2 = () => {
     return (
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={isModal2Visible}>
+      <Modal animationType="fade" transparent={true} visible={isModal2Visible}>
         <View style={styles.modalContainer}>
-          <ScrollView style={{ width: '100%' }}>
-
-          <View>
-          <Text style = {{fontWeight: 'bold'}}>!</Text>
-          </View>
-
-<View 
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-          }}>
-          <Icon onPress={() => setIsModal2Visible(false)}
-            reverse
-            name="minus"
-            type="feather"
-            color="darkblue"
-
-          />
+        <ScrollView contentContainerStyle={{ width: '100%' }}>
+            <View>
+              <Text style={{ fontWeight: 'bold' }}>!</Text>
+            </View>
+            <View style={styles.modalRow}>
+              <TouchableOpacity onPress={() => setIsModal2Visible(false)}>
+                <Text style={styles.icon}>➖</Text>
+              </TouchableOpacity>
               <View style={styles.modalBackButton}>
                 <TouchableOpacity
                   style={styles.cancelButton}
-                  onPress={() => setIsModal2Visible(false)}>
-                  <Text
-                    style={{
-                      color: '#F0A160',
-                      textSize: 20,
-                      fontWeight: 'bold',
-                    }}>
-                    Cancel
-                  </Text>
+                  onPress={() => setIsModal2Visible(false)}
+                >
+                  <Text style={styles.cancelText}>Cancel</Text>
                 </TouchableOpacity>
               </View>
-              </View>
-
-
-
-
+            </View>
           </ScrollView>
         </View>
       </Modal>
@@ -163,91 +90,48 @@ function Crop() {
 
   return (
     <SafeAreaView style={styles.container}>
-
-<View>
-<TouchableOpacity style ={{alignSelf : "center", justifyContent : "center",   backgroundColor : "#2F5061", width : 1600, marginTop : -210, height : 120}}>
-
-<Text style ={{alignSelf : "center", marginTop : 20, fontWeight : "bold", fontSize : 20, marginLeft : 30, color: "white"}}>Crop Recorder</Text>
-
-<TouchableOpacity onPress = {()=> { /* Navigate to SideDrawer */ }} style = {{backgroundColor : "#FFCA4B", marginTop : -45, width :70, borderRadius: 200, marginLeft : 40}}>
- <Icon 
-            raised 
-
-            name="menu"
-            type="feather" 
-            color="#F6A21E"
-
-          />
-          </TouchableOpacity>
-</TouchableOpacity>
-
-</View>
-<View>
-<TouchableOpacity
-            style={styles.button2}
-            onPress={() => {
-              setIsModalVisible(true);
-            }}>
-           <Text style = {styles.buttonText}>Input Details</Text>
-          </TouchableOpacity>
-
-          {showModal()}
-  </View>
-
-  <View>
-<TouchableOpacity
-            style={styles.button2}
-            onPress={() => {
-             {/* Navigate to CropRec */ };
-            }}>
-           <Text style = {styles.buttonText}>Check Report</Text>
-          </TouchableOpacity>
-
-  </View>
-
-
-
-
-
-
+      <View>
+        <TouchableOpacity style={styles.headerButton}>
+          <Text style={styles.headerText}>Crop Recorder</Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <TouchableOpacity style={styles.button2} onPress={() => setIsModalVisible(true)}>
+          <Text style={styles.buttonText}>Input Details</Text>
+        </TouchableOpacity>
+        {showModal()}
+      </View>
+      <View>
+        <TouchableOpacity style={styles.button2}>
+          <Text style={styles.buttonText}>Check Report</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
 
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#E57F84"
-  },
-  fadingContainer: {
-
-    backgroundColor: "powderblue"
-  },
-  fadingText: {
-    fontSize: 18
-  },
-  buttonRow: {
-    flexBasis: 100,
-    justifyContent: "space-evenly",
-    marginVertical: 16
-  },
-  button: {
-    width: 300,
-    height: 50,
-    justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 15,
-    backgroundColor: '#FFCD58',
-    shadowColor: '#DAD870',
-    shadowOffset: { width: 10, height: 15 },
-    shadowOpacity: 0.5,
-    shadowRadius: 1,
-    elevation: 6,
-    marginTop : -190 
+    justifyContent: 'center',
+    backgroundColor: '#E57F84',
+  },
+  headerButton: {
+    alignSelf: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#2F5061',
+    width: 1600,
+    marginTop: -210,
+    height: 120,
+  },
+  headerText: {
+    alignSelf: 'center',
+    marginTop: 20,
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginLeft: 30,
+    color: 'white',
   },
   button2: {
     width: 300,
@@ -261,16 +145,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 1,
     elevation: 6,
-    marginTop : 100 
+    marginTop: 100,
   },
-
   buttonText: {
     color: '#FF5C4D',
-    fontSize: 20,  
+    fontSize: 20,
     fontWeight: 'bold',
-
-
-
   },
   modalContainer: {
     flex: 1,
@@ -282,27 +162,20 @@ const styles = StyleSheet.create({
     marginLeft: 628,
     marginTop: 50,
     marginBottom: 80,
-    height : 10,
-    width : 280,
-
+    height: 10,
+    width: 280,
   },
-
-   KeyboardAvoidingView: {
+  KeyboardAvoidingView: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-
-  modalTitle: {
-    justifyContent: 'center',
-    alignSelf: 'center',
-    fontSize: 22,
-    backgroundColor: '#F88379',
-    borderRadius: 12,
+  modalRow: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
-
-
-
   formTextInput: {
     width: '75%',
     height: 35,
@@ -313,7 +186,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     padding: 10,
   },
-
   registerButton: {
     width: 200,
     height: 40,
@@ -324,13 +196,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     backgroundColor: '#D0E6F0',
   },
-
   registerButtonText: {
     color: '#F54D3D',
     fontSize: 15,
     fontWeight: 'bold',
   },
-
   cancelButton: {
     width: 200,
     height: 30,
@@ -341,4 +211,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#4C5D70',
   },
+  cancelText: {
+    color: '#F0A160',
+    textSize: 20,
+    fontWeight: 'bold',
+  },
+  icon: {
+    fontSize: 24,
+    marginRight: 10,
+  },
 });
+
+export default Crop;

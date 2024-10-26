@@ -1,118 +1,67 @@
-import React, { useRef } from "react";
-import { Animated, Text, View, StyleSheet, Button, SafeAreaView,  TouchableOpacity, Modal, ScrollView, Image, KeyboardAvoidingView, TextInput } from "react-native";
-import AppHeader from '../components/AppHeader'
-import { SearchBar, Icon, Header } from 'react-native-elements';
-import { Card } from 'react-native-paper';
-    
+import React from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView, Modal, ScrollView, KeyboardAvoidingView, Image } from 'react-native';
 
-export default class Fin extends React.Component{  
-
-constructor() {
+export default class Fin extends React.Component {
+  constructor() {
     super();
     this.state = {
       isModal2Visible: false,
       isModalVisible: false,
-     crop: '',
-     production: '',
-     
+      crop: '',
+      production: '',
     };
   }
 
-showModal = () => {
+  showModal = () => {
     return (
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={this.state.isModalVisible}>
+      <Modal animationType="fade" transparent={true} visible={this.state.isModalVisible}>
         <View style={styles.modalContainer}>
-          <ScrollView style={{ width: '150%' }}>
+        <ScrollView contentContainerStyle={{ width: '150%' }}>
             <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
-              
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="leaf" type="font-awesome" color="#FFC270" />
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}>🍃</Text>
                 <TextInput
                   style={styles.formTextInput}
-                  placeholder={'Crop price per kg'}
+                  placeholder="Crop price per kg"
                   onChangeText={(text) => {
                     this.setState({ state: text });
                   }}
                 />
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="archive" type="feather" color="#FFC270" />
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}>📦</Text>
                 <TextInput
                   style={styles.formTextInput}
-                  placeholder={'production in kg'}
+                  placeholder="Production in kg"
                   onChangeText={(text) => {
                     this.setState({ state: text });
                   }}
                 />
               </View>
-               <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="alert-circle" type="feather" color="#FFC270" />
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}>⚠️</Text>
                 <TextInput
                   style={styles.formTextInput}
-                  placeholder={'Expenses'}
+                  placeholder="Expenses"
                   onChangeText={(text) => {
                     this.setState({ state: text });
                   }}
                 />
               </View>
-              
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="user-plus" type="feather" color="orange" />
+              <View style={styles.modalRow}>
                 <View style={styles.modalBackButton}>
-                  <TouchableOpacity
-                    style={styles.registerButton}
-                    onPress={() => this.userSignUp(this.state.username)}>
+                  <TouchableOpacity style={styles.registerButton}>
                     <Text style={styles.registerButtonText}>Register</Text>
                   </TouchableOpacity>
                 </View>
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="minus" type="feather" color="darkblue" />
+              <View style={styles.modalRow}>
                 <View style={styles.modalBackButton}>
                   <TouchableOpacity
                     style={styles.cancelButton}
-                    onPress={() => this.setState({ isModalVisible: false })}>
-                    <Text
-                      style={{
-                        color: '#F0A160',
-                        textSize: 20,
-                        fontWeight: 'bold',
-                      }}>
-                      Cancel
-                    </Text>
+                    onPress={() => this.setState({ isModalVisible: false })}
+                  >
+                    <Text style={styles.cancelText}>Cancel</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -120,67 +69,39 @@ showModal = () => {
           </ScrollView>
         </View>
       </Modal>
-
-        
-      
     );
   };
 
-
-showModal2 = () => {
+  showModal2 = () => {
     return (
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={this.state.isModal2Visible}>
+      <Modal animationType="fade" transparent={true} visible={this.state.isModal2Visible}>
         <View style={styles.modalContainer}>
-          <ScrollView style={{ width: '150%' }}>
+        <ScrollView contentContainerStyle={{ width: '150%' }}>
             <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
-              
-              
-                <View style={styles.modalBackButton}>
-                  <TouchableOpacity
-                   >
-                    <Text style={styles.registerButtonText}>
+              <View style={styles.modalBackButton}>
+                <TouchableOpacity>
+                  <Text style={styles.registerButtonText}>
                     <View>
-                    <Card style={styles.button2}>
-         Total Yield : 2500Rs
-        
-      </Card>
-      <Card style={styles.button2}>
-         Expenses : 1500Rs
- 
-      </Card>
-      <Card style={styles.button2}>
-        Net Revenue : 1000Rs
- 
-      </Card>
-      
-      </View>
-                    
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="minus" type="feather" color="darkblue" />
+                      <View style={styles.button2}>
+                        <Text>Total Yield: 2500Rs</Text>
+                      </View>
+                      <View style={styles.button2}>
+                        <Text>Expenses: 1500Rs</Text>
+                      </View>
+                      <View style={styles.button2}>
+                        <Text>Net Revenue: 1000Rs</Text>
+                      </View>
+                    </View>
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.modalRow}>
                 <View style={styles.modalBackButton}>
                   <TouchableOpacity
                     style={styles.cancelButton}
-                    onPress={() => this.setState({ isModal2Visible: false })}>
-                    <Text
-                      style={{
-                        color: '#F0A160',
-                        textSize: 20,
-                        fontWeight: 'bold',
-                      }}>
-                      Cancel
-                    </Text>
+                    onPress={() => this.setState({ isModal2Visible: false })}
+                  >
+                    <Text style={styles.cancelText}>Cancel</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -188,77 +109,52 @@ showModal2 = () => {
           </ScrollView>
         </View>
       </Modal>
-
-        
-      
     );
   };
 
-  render(){
-  return (
-    <SafeAreaView style={styles.container}>
-    
-<View>
-<TouchableOpacity style ={{alignSelf : "center", justifyContent : "center",   backgroundColor : "#2F5061", width : 1600, marginTop : -110, height : 120}}>
-
-<Text style ={{alignSelf : "center", marginTop : 20, fontWeight : "bold", fontSize : 20, marginLeft : 30, color : "white"}}>Financial Calculator</Text>
-
-<TouchableOpacity onPress = {()=> this.props.navigation.navigate("SideDrawer")} style = {{backgroundColor : "#FFCA4B", marginTop : -45, width :70, borderRadius: 200, marginLeft : 40}}>
- <Icon 
-            raised 
-           
-            name="menu"
-            type="feather"
-            color="#F6A21E"
-             
-          />
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View>
+          <TouchableOpacity style={styles.headerButton}>
+            <Text style={styles.headerText}>Financial Calculator</Text>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate("SideDrawer")}
+              style={styles.menuButton}
+            >
+              <Text style={styles.menuIcon}>≡</Text>
+            </TouchableOpacity>
           </TouchableOpacity>
-</TouchableOpacity>
-
-</View>
-
-<View>
-<TouchableOpacity
+        </View>
+        <View>
+          <TouchableOpacity
             style={styles.button2}
             onPress={() => {
-              this.setState({
-                isModalVisible: true,
-              });
-            }}>
-           <Text style = {styles.buttonText}>Input Details</Text>
+              this.setState({ isModalVisible: true });
+            }}
+          >
+            <Text style={styles.buttonText}>Input Details</Text>
           </TouchableOpacity>
-
           {this.showModal()}
-  </View>
-
-<View>
-<TouchableOpacity
+        </View>
+        <View>
+          <TouchableOpacity
             style={styles.button2}
             onPress={() => {
-              this.setState({
-                isModal2Visible: true,
-              });
-            }}>
-           <Text style = {styles.buttonText}>Calculate</Text>
+              this.setState({ isModal2Visible: true });
+            }}
+          >
+            <Text style={styles.buttonText}>Calculate</Text>
           </TouchableOpacity>
-
           {this.showModal2()}
-  </View>
-
-<View><Image
-          //source={require('../assets/animation_500_l1g70035.gif')} 
-          style={{ width: 350, height: 350}}
-        /></View>
-
-
-    
-  
-    </SafeAreaView>
-  );
+        </View>
+        <View>
+          <Image source={require('../assetss/animation_500_l1g70035.gif')} style={{ width: 350, height: 350 }} />
+        </View>
+      </SafeAreaView>
+    );
+  }
 }
-}
-
-  
 
 const styles = StyleSheet.create({
   container: {

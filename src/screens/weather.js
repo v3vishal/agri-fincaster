@@ -1,18 +1,12 @@
-import React, { useRef } from "react";
-import { Animated, Text, View, StyleSheet, Button, SafeAreaView,  TouchableOpacity, Modal, ScrollView, Image, KeyboardAvoidingView, TextInput } from "react-native";
-import AppHeader from '../components/AppHeader'
-import { SearchBar, Icon, Header } from 'react-native-elements';
-import { Card } from 'react-native-paper';
-    
+import React from 'react';
+import { Text, View, TouchableOpacity, Modal, ScrollView, KeyboardAvoidingView, TextInput, StyleSheet, SafeAreaView } from 'react-native';
 
-
-export default class Weather extends React.Component{  
-
-constructor() {
+export default class Weather extends React.Component {
+  constructor() {
     super();
     this.state = {
       isModalVisible: false,
-       isModal2Visible: false,
+      isModal2Visible: false,
       contact: '',
       state: '',
       city: '',
@@ -21,134 +15,65 @@ constructor() {
     };
   }
 
-showModal = () => {
+  showModal = () => {
     return (
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={this.state.isModalVisible}>
+      <Modal animationType="fade" transparent={true} visible={this.state.isModalVisible}>
         <View style={styles.modalContainer}>
-          <ScrollView style={{ width: '150%' }}>
+        <ScrollView contentContainerStyle={{ width: '150%' }}>
             <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
-              
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="globe" type="feather" color="#FFC270" />
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}>🌍</Text>
                 <TextInput
                   style={styles.formTextInput}
-                  placeholder={'state'}
+                  placeholder="State"
                   onChangeText={(text) => {
                     this.setState({ state: text });
                   }}
                 />
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="map" type="feather" color="#FF69B4" />
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}>🗺️</Text>
                 <TextInput
                   style={styles.formTextInput}
-                  placeholder={'city'}
-                  keyboardType={'email-address'}
+                  placeholder="City"
                   onChangeText={(text) => {
                     this.setState({ city: text });
                   }}
                 />
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                  marginLeft: -10,
-                }}>
-                <Icon
-                  reverse
-                  name="navigation"
-                  type="feather"
-                  color="#A2DCE7"
-                />
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}>📍</Text>
                 <TextInput
                   style={styles.formTextInput}
-                  placeholder={'district'}
+                  placeholder="District"
                   multiline={true}
                   onChangeText={(text) => {
                     this.setState({ district: text });
                   }}
                 />
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                  marginLeft: -10,
-                }}>
-                <Icon
-                  reverse
-                  name="map-pin"
-                  type="feather"
-                  color="#A2DCE7"
-                />
+              <View style={styles.modalRow}>
+                <Text style={styles.icon}>📌</Text>
                 <TextInput
                   style={styles.formTextInput}
-                  placeholder={'panchayat'}
+                  placeholder="Panchayat"
                   multiline={true}
                   onChangeText={(text) => {
                     this.setState({ panchayat: text });
                   }}
                 />
               </View>
-              
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="user-plus" type="feather" color="orange" />
+              <View style={styles.modalRow}>
                 <View style={styles.modalBackButton}>
-                  <TouchableOpacity
-                    style={styles.registerButton}
-                    onPress={() => {
-             this.props.navigation.navigate("Weather");
-            }}>
+                  <TouchableOpacity style={styles.registerButton} onPress={() => { this.props.navigation.navigate("Weather"); }}>
                     <Text style={styles.registerButtonText}>Register</Text>
                   </TouchableOpacity>
                 </View>
               </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="minus" type="feather" color="darkblue" />
+              <View style={styles.modalRow}>
                 <View style={styles.modalBackButton}>
-                  <TouchableOpacity
-                    style={styles.cancelButton}
-                    onPress={() => this.setState({ isModalVisible: false })}>
-                    <Text
-                      style={{
-                        color: '#F0A160',
-                        textSize: 20,
-                        fontWeight: 'bold',
-                      }}>
-                      Cancel
-                    </Text>
+                  <TouchableOpacity style={styles.cancelButton} onPress={() => this.setState({ isModalVisible: false })}>
+                    <Text style={styles.cancelText}>Cancel</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -156,69 +81,35 @@ showModal = () => {
           </ScrollView>
         </View>
       </Modal>
-
-        
-      
     );
   };
 
-showModal2 = () => {
+  showModal2 = () => {
     return (
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={this.state.isModal2Visible}>
+      <Modal animationType="fade" transparent={true} visible={this.state.isModal2Visible}>
         <View style={styles.modalContainer}>
           <ScrollView style={{ width: '150%' }}>
             <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
-              
-              
-                <View style={styles.modalBackButton}>
-                  <TouchableOpacity
-                   >
-                    <Text style={styles.registerButtonText}>
-                    <View>
-                    <Card style={styles.button2}>
-         Location    :  Uttar Pradesh, Ghaziabad, Loni, West Ghat
-        
-      </Card>
-      <Card style={styles.button2}>
-         Temperature : 24 deg celcius
- 
-      </Card>
-      <Card style={styles.button2}>
-         Precipitation : 50%
- 
-      </Card>
-      <Card style={styles.button2}>
-         Optimal weather for growing Paddy and Beans
- 
-      </Card>
-      </View>
-                    
-                    </Text>
-                  </TouchableOpacity>
+              <View style={styles.modalBackButton}>
+                <View>
+                  <View style={styles.card}>
+                    <Text>Location: Uttar Pradesh, Ghaziabad, Loni, West Ghat</Text>
+                  </View>
+                  <View style={styles.card}>
+                    <Text>Temperature: 24°C</Text>
+                  </View>
+                  <View style={styles.card}>
+                    <Text>Precipitation: 50%</Text>
+                  </View>
+                  <View style={styles.card}>
+                    <Text>Optimal weather for growing Paddy and Beans</Text>
+                  </View>
                 </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                }}>
-                <Icon reverse name="minus" type="feather" color="darkblue" />
+              </View>
+              <View style={styles.modalRow}>
                 <View style={styles.modalBackButton}>
-                  <TouchableOpacity
-                    style={styles.cancelButton}
-                    onPress={() => this.setState({ isModal2Visible: false })}>
-                    <Text
-                      style={{
-                        color: '#F0A160',
-                        textSize: 20,
-                        fontWeight: 'bold',
-                      }}>
-                      Cancel
-                    </Text>
+                  <TouchableOpacity style={styles.cancelButton} onPress={() => this.setState({ isModal2Visible: false })}>
+                    <Text style={styles.cancelText}>Cancel</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -226,83 +117,38 @@ showModal2 = () => {
           </ScrollView>
         </View>
       </Modal>
-
-        
-      
     );
   };
 
-
-
-  render(){
-  return (
-    <SafeAreaView style={styles.container}>
-    
-<View>
-<TouchableOpacity style ={{alignSelf : "center", justifyContent : "center",   backgroundColor : "#2F5061", width : 1600, marginTop : 50, height : 120}}>
-
-<Text style ={{alignSelf : "center", marginTop : 20, fontWeight : "bold", fontSize : 20, marginLeft : 30, color : "white"}}>Weather Recorder</Text>
-
-<TouchableOpacity onPress = {()=> this.props.navigation.navigate("SideDrawer")} style = {{backgroundColor : "#FFCA4B", marginTop : -45, width :70, borderRadius: 200, marginLeft : 40}}>
- <Icon 
-            raised 
-           
-            name="menu"
-            type="feather"
-            color="#F6A21E"
-             
-          />
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View>
+          <TouchableOpacity style={styles.headerButton}>
+            <Text style={styles.headerText}>Weather Recorder</Text>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate("SideDrawer")} style={styles.menuButton}>
+              <Text style={styles.menuIcon}>≡</Text>
+            </TouchableOpacity>
           </TouchableOpacity>
-</TouchableOpacity>
-
-</View>
-
-<View>
-<TouchableOpacity
-            style={styles.button2}
-            onPress={() => {
-              this.setState({
-                isModalVisible: true,
-              });
-            }}>
-           <Text style = {styles.buttonText}>Input Details</Text>
+        </View>
+        <View>
+          <TouchableOpacity style={styles.button2} onPress={() => { this.setState({ isModalVisible: true }); }}>
+            <Text style={styles.buttonText}>Input Details</Text>
           </TouchableOpacity>
-
           {this.showModal()}
-  </View>
-  
-<View>
-<TouchableOpacity
-            style={styles.button2}
-            onPress={() => {
-              this.setState({
-                isModal2Visible: true,
-              });
-            }}>
-           <Text style = {styles.buttonText}>Predict</Text>
+        </View>
+        <View>
+          <TouchableOpacity style={styles.button2} onPress={() => { this.setState({ isModal2Visible: true }); }}>
+            <Text style={styles.buttonText}>Predict</Text>
           </TouchableOpacity>
-           {this.showModal2()}
-
-  </View>
-   <View>
-
-
-  </View>
-
-<View><Image
-          //source={require('../assets/animation_500_l1g70035.gif')} 
-          style={{ width: 350, height: 350}}
-        /></View>
-
-
-    
-  
-    </SafeAreaView>
-  );
+          {this.showModal2()}
+        </View>
+        <View>
+        </View>
+      </SafeAreaView>
+    );
 }
 }
-
-  
 
 const styles = StyleSheet.create({
   container: {
