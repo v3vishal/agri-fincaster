@@ -20,7 +20,6 @@ function CustomTabNavigator() {
           } else if (route.name === 'Crop') {
             icon = require('../assetss/crop.png');
           }
-
           return <Image source={icon} style={styles.tabIcon} />;
         },
         tabBarLabel: ({ focused }) => (

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, Image, Modal, KeyboardAvoidingView, ScrollView } from 'react-native';
-import db from '../config';
 import 'firebase/auth';
-import 'firebase/firestore';
+import {getFirestore} from 'firebase/firestore';
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 const firebaseConfig = {
@@ -16,6 +15,7 @@ const firebaseConfig = {
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 function Login({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -30,7 +30,7 @@ function Login({ navigation }) {
     if (password !== confirmPassword) {
       return Alert.alert("Password doesn't match. Check your password.");
     } else {
-      createUserWithEmailAndPassword(username, password)
+      createUserWithEmailAndPassword(auth, username, password)
         .then(() => {
           db.collection('users').add({
             name: name,
@@ -53,9 +53,9 @@ function Login({ navigation }) {
   };
 
   const userLogin = (username, password) => {
-    signInWithEmailAndPassword(username, password)
+    signInWithEmailAndPassword(auth, username, password)
       .then(() => {
-        navigation.navigate('TabNavigation');
+        navigation.navigate('Main');
       })
       .catch((error) => {
         var errorCode = error.code;
