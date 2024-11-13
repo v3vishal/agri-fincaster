@@ -1,38 +1,117 @@
-.App {
-  text-align: center;
+:root {
+  --argentinian-blue: #48acf0;
+  --light-red: #ff6b6b;
+  --licorice: #22181c;
+  --moss-green: #7b904b;
+  --dark-moss-green: #4f5d2f;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body, html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  min-height: calc(100vh - 120px); /* Header + bottom nav */
+  box-sizing: border-box;
+}
+
+input, button, select {
+  padding: 12px;
+  margin: 10px 0;
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--argentinian-blue);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+button {
+  background-color: var(--light-red);
+}
+
+button:hover {
+  background-color: var(--dark-moss-green);
+}
+
+nav {
+  background-color: var(--moss-green);
+  width: 100vw; /* Full viewport width */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  height: 60px;
+  z-index: 1000;
+}
+
+nav a {
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+.icon {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.icon img {
+  width: 24px; /* Adjust icon size */
+  height: 24px;
+  margin-bottom: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    max-width: 90%;
   }
-  to {
-    transform: rotate(360deg);
-  }
+}
+
+.header {
+  width: 100vw; /* Full viewport width */
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--argentinian-blue);
+  z-index: 1000;
+}
+
+.signout-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.signout-button:hover {
+  color: var(--light-red);
 }
