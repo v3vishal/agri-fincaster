@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import '../Layout.css'; // Ensure this file exists and is updated as shown below
 function Crops() {
   const [cropName, setCropName] = useState("");
   const [quantity, setQuantity] = useState("");

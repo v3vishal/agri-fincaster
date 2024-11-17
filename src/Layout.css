@@ -1,0 +1,112 @@
+/* Full-page layout */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* Removes unnecessary scroll */
+}
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: #C1DC98; /* Light beige background */
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the title initially */
+  background-color: #1D7874; /* Dark teal background */
+  color: #ffffff;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.signout-button {
+  background-color: #FF8559; /* Yellow-orange button */
+  border: none;
+  padding: 5px 8px; /* Reduced padding */
+  color: #ffffff;
+  font-size: 12px; /* Smaller font size */
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 5px;
+  position: absolute; /* Position the button within the header */
+  left: -2px; /* Align to the left with spacing */
+  width: 100px;
+  height: 70px;
+  
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  overflow: hidden; /* Ensures no scrollbars unless content overflows */
+}
+/* Bottom Navigation */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px 0;
+  border-top: 1px solid #dcdcdc;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  height: 10%;
+}
+
+.nav-item {
+  text-align: center; /* Ensures the text is centered below the image */
+  text-decoration: none;
+  color: #000000;
+  font-size: 14px; /* Slightly larger font size */
+  margin-bottom: 50px;
+}
+
+.nav-icon {
+  width: 80px; /* Increased size */
+  height: 80px; /* Increased size */
+  margin: 0 auto 5px; /* Centers the image and adds spacing below it */
+  display: block;
+  
+}
+
+.repnav-icon {
+  width: 150px; /* Increased size */
+  height: 80px; /* Increased size */
+  margin: 0 auto 5px; /* Centers the image and adds spacing below it */
+  display: block;
+
+ 
+}
+.repnav-item {
+  text-align: center; /* Ensures the text is centered below the image */
+  text-decoration: none;
+  color: #000000;
+  font-size: 14px; /* Slightly larger font size */
+  margin-bottom: 50px;
+}
+
+.logo {
+  width: 300px; /* Increased size */
+  height: 300px; /* Increased size */
+  margin: 0 auto 5px; /* Centers the image and adds spacing below it */
+  display: block;
+  margin-top: 50px;
+  
+}
