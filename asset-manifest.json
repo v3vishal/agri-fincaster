@@ -1,15 +1,21 @@
 {
   "files": {
-    "main.css": "/agri-fincaster/static/css/main.8604a66c.css",
-    "main.js": "/agri-fincaster/static/js/main.58882c33.js",
+    "main.css": "/agri-fincaster/static/css/main.ed32ba01.css",
+    "main.js": "/agri-fincaster/static/js/main.c9e2b217.js",
     "static/js/453.7947e139.chunk.js": "/agri-fincaster/static/js/453.7947e139.chunk.js",
+    "static/media/smthn.png": "/agri-fincaster/static/media/smthn.ddf187a8d00ecdaafd93.png",
+    "static/media/crop.png": "/agri-fincaster/static/media/crop.3fd0bd21a347f2bb617d.png",
+    "static/media/report.png": "/agri-fincaster/static/media/report.0c29fcc850f33f6032ce.png",
+    "static/media/logo.png": "/agri-fincaster/static/media/logo.2ecc2af2999d9577d590.png",
+    "static/media/finance.png": "/agri-fincaster/static/media/finance.c66ffe987696d42e5646.png",
+    "static/media/weat.png": "/agri-fincaster/static/media/weat.3d6de8c82e90ccd1c4f1.png",
     "index.html": "/agri-fincaster/index.html",
-    "main.8604a66c.css.map": "/agri-fincaster/static/css/main.8604a66c.css.map",
-    "main.58882c33.js.map": "/agri-fincaster/static/js/main.58882c33.js.map",
+    "main.ed32ba01.css.map": "/agri-fincaster/static/css/main.ed32ba01.css.map",
+    "main.c9e2b217.js.map": "/agri-fincaster/static/js/main.c9e2b217.js.map",
     "453.7947e139.chunk.js.map": "/agri-fincaster/static/js/453.7947e139.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8604a66c.css",
-    "static/js/main.58882c33.js"
+    "static/css/main.ed32ba01.css",
+    "static/js/main.c9e2b217.js"
   ]
 }
